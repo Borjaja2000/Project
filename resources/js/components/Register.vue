@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import router from "../router";
+
 export default {
     data() {
         return {
@@ -81,7 +83,7 @@ export default {
             axios
                 .post("/register", this.fields)
                 .then(() => {
-                    this.$router.push('login');
+                    router.push('login');
                 })
                 .catch((error) => {
                     this.errors = error.response.data.errors;

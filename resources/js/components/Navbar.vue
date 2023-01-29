@@ -25,7 +25,7 @@
                                     <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
                                     <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
                                     <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-                                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Add Product</a>
+                                    <a @click="addProduct" class="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Add Product</a>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                         <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Add Product</a>
+                        <a @click="addProduct" class="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Add Product</a>
                     </div>
                 </div>
             </nav>
@@ -75,6 +75,8 @@
     </div>
 </template>
 <script>
+import router from "../router";
+
 export default {
     data() {
         return {
@@ -85,12 +87,15 @@ export default {
         currentUser() {
             return this.$store.state.auth.user;
         },
+        addProduct(){
+            router.push('addProduct');
+        },
         logout() {
             axios
                 .post("logout")
                 .then((response) => {
                     localStorage.removeItem('user');
-                    this.$router.push({path: 'login'});
+                    router.push({path: 'login'});
                     return response.data;
                 })
                 .catch((error) => {

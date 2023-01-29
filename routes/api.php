@@ -32,6 +32,5 @@ Route::post('logout', [AuthController::class, 'logout']);
 
 Route::get('login/{provider}', [AuthController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
-
 Route::post('social/{provider}', [AuthController::class, 'social']);
 
