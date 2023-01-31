@@ -16,10 +16,8 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('../resources/assets');
-            $product->photo = $path;
+            $product->photo = $request->file('photo')->store('../resources/assets');
         }
-
         $product->save();
     }
 }
