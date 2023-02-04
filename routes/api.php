@@ -26,13 +26,17 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
 });
 
 
-
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout']);
 
 Route::post('store/products', [ProductController::class, 'store']);
 Route::get('all/products', [ProductController::class, 'index']);
+
+Route::post('/cart', [CartsController::class, 'store'])->name('cart');
+Route::get('/checkout', [CartsController::class, 'index'])->name('checkout');
+Route::get('/checkout/get/items', [CartsController::class, 'getCartItemsForCheckout']);
+Route::post('/process/user/payment', [CartsController::class, 'processPayment']);
 
 Route::get('login/{provider}', [AuthController::class, 'redirectToProvider']);
 Route::get('login/{provider}/callback', [AuthController::class, 'handleProviderCallback']);

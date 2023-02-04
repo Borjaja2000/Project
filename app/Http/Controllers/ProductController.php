@@ -22,12 +22,12 @@ class ProductController extends Controller
             'price' => 'required|numeric|max:1000',
             'photo' => 'required|image|mimes:jpg,jpeg,png,gif,tif,svg',
         ]);
-
+        $imageName = time().'.'.$request->photo->extension();
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'photo' => $request->file('photo')->store(''),
+            'photo' =>  $request->photo->storeAs('', $imageName)
         ]);
 
         return response($product, Response::HTTP_CREATED);
